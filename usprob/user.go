@@ -13,6 +13,6 @@ func UserGo(str string) {
 		fmt.Println("Hello,", user1)
 
 	}
-	fmt.Println("")
+	fmt.Println("1")
 
 }
