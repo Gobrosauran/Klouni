@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"klouni/ages"
 	"klouni/usprob"
 )
 
@@ -12,37 +11,53 @@ type User struct {
 	Rating float64
 }
 
+func NewUser(
+	name string,
+	age int,
+	rating float64,
+) User {
+	if name == "" {
+		return User{}
+	}
+
+	if age < 0 || age > 150 {
+		return User{}
+	}
+
+	if rating < 0.0 || rating > 10.0 {
+		return User{}
+	}
+	return User{
+		Name:   name,
+		Age:    age,
+		Rating: rating,
+	}
+
+}
+
 func (u User) NameUSer(name string) {
 	usprob.UserGo(u.Name)
 }
 
-func (u User) Greeting(rating float64) {
-	if u.Rating-rating < 10.0 {
+func Greeting(u *User, rating float64) {
+	if u.Rating+rating <= 10.0 {
+		u.Rating += rating
 		fmt.Println("User Rating:", u.Rating)
 		return
 
-	} else if u.Rating+rating == 10.0 {
-		fmt.Println(":", u.Rating)
+	} else {
+		fmt.Println(u.Rating)
 		return
 
 	}
 }
 
 func main() {
-	user := User{
-		Name:   "Sauran",
-		Age:    18,
-		Rating: 9.9,
-	}
-	
-
-	fmt.Println("user:", user)
-	user.NameUSer(user.Name)
-
-	fmt.Println("")
-	user.Greeting(user.Rating)
-	fmt.Println("")
-
-	ages.Userages(user.Age)
+	user := NewUser(
+		"",
+		160,
+		0.0,
+	)
+	fmt.Println("User:", user)
 
 }
